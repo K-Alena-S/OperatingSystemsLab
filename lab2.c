@@ -3,6 +3,10 @@
 #include <time.h>
 #include <stdlib.h>
 
+#define error_time -1
+#define true_setenv 0
+#define error NULL
+
 extern char *tzname[];
 
 int main(){
@@ -10,25 +14,25 @@ int main(){
   struct tm *sp;
   char *Ctime;
   
-  int res1 = time(&now);
-  if (res1 == -1){
+  int result_time = time(&now);
+  if (result_time == error_time){
     perror("Error");
     return 1;
   }
   
-  int res2 = setenv("TZ", "PST8PDT", 1);
-  if (res2 != 0){
+  int result_setenv = setenv("TZ", "PST8PDT", 1);
+  if (result_setenv != true_setenv){
     perror("Error");
     return 1;
   }
   
-  if ((Ctime = ctime(&now)) == NULL){
+  if ((Ctime = ctime(&now)) == error){
     perror("Error");
     return 1;
   }
   printf("%s", Ctime);
   
-  if ((sp = localtime(&now)) == NULL){
+  if ((sp = localtime(&now)) == error){
     perror("Error");
     return 1;
   }
