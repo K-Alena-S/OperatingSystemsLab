@@ -29,18 +29,18 @@ int open_file() {
 
 
 int main() {
-    print_id();
-    open_file();
+    
+    print_id(); // Печать эффективного и реального идентфикатора пользователя
+    open_file(); // Открытие файла
 
-    int setuid_res = setuid(getuid());
+    int setuid_res = setuid(getuid()); // Устанавливаем эффективный идентификатор равным реальному
     if (setuid_res == ERROR_CODE_SETUID) {
         perror("Setuid");
         return ERROR;
     }
 
     print_id();
-    open_file();
+    open_file(); // Второй раз пытаемся открыть файл, уже с измененным идентификатором
 
     return SUCCESSFUL_END;
 }
-~
