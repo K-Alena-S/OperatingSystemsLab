@@ -55,7 +55,7 @@ int main() {
     }
 
     print_id();
-    result open_file(); // Второй раз пытаемся открыть файл, уже с измененным идентификатором
+    result = open_file(); // Второй раз пытаемся открыть файл, уже с измененным идентификатором
     if (result == SUCCESSFUL_END) return SUCCESSFUL_END;
     
     return result;
