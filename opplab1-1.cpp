@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
             MPI_Allreduce(&res, &norm, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
             norm = sqrt(norm);
-        } while ((norm / B) >= 0.0001);
+        } while ((norm / B) >= 0.00001);
 
     MPI_Barrier(MPI_COMM_WORLD);
 
