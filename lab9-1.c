@@ -6,7 +6,7 @@
 #define SUCCESSFUL_END 0
 #define CHILD 0
 
-int main() {
+int main(int argc, char *argv[]) {
     int pid = fork();
     if (pid == ERROR_FORK) {
         perror("error fork");
