@@ -13,7 +13,7 @@ int main() {
         return ERROR;
     }
     if (pid == CHILD) {
-        execlp("cat", "cat", "lab9.txt", NULL);
+        execlp("cat", "cat", argv[1], NULL);
         perror("execlp");
         return ERROR;
     }
