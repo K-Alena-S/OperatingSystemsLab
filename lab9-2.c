@@ -10,14 +10,14 @@
 #define CHILD 0
 
 
-int main() {
+int main(int argc, char *argv[]) {
     int pid = fork(); 
     if (pid == ERROR_FORK) {
         perror("error fork");
         return ERROR;
     }
     if (pid == CHILD) {
-        execlp("cat", "cat", "lab9.txt", NULL);
+        execlp("cat", "cat", argv[1], NULL);
         perror("execlp");
         return ERROR;
     }
