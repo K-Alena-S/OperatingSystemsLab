@@ -36,8 +36,6 @@ int to_upper_case(int file_descriptor) {
 int main() {
     struct sockaddr_un addr;
 
-    unlink("server");
-
     memset(&addr, 0, sizeof(addr));
 
     int server_fd = socket(AF_LOCAL, SOCK_STREAM, DEFAULT_PROTOCOL);
@@ -54,6 +52,7 @@ int main() {
     if (bind_result == ERROR) {
         perror("couldn't bind");
         close(server_fd);
+        unlink("server");
         return COMPLETION_ERROR;
     }
 
@@ -61,6 +60,7 @@ int main() {
     if (listen_result == ERROR) {
         perror("couldn't listen");
         close(server_fd);
+        unlink("server");
         return COMPLETION_ERROR;
     }
 
@@ -68,6 +68,7 @@ int main() {
     if (client_fd == ERROR) {
         perror("couldn't accept");
         close(server_fd);
+        unlink("server");
         return COMPLETION_ERROR;
     }
 
@@ -75,8 +76,10 @@ int main() {
     if (close_result == ERROR) {
         perror("couldn't close");
         close(client_fd);
+        unlink("server");
         return COMPLETION_ERROR;
     }
+    unlink("server");
 
     int read_result = to_upper_case(client_fd);
     if (read_result == COMPLETION_ERROR) {
@@ -90,6 +93,5 @@ int main() {
         return COMPLETION_ERROR;
     }
 
-    unlink("server");
     return SUCCESSFUL_END;
 }
