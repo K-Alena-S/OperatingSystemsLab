@@ -79,19 +79,21 @@ int main() {
         unlink("server");
         return COMPLETION_ERROR;
     }
-    unlink("server");
 
     int read_result = to_upper_case(client_fd);
     if (read_result == COMPLETION_ERROR) {
         close(client_fd);
+        unlink("server");
         return COMPLETION_ERROR;
     }
 
     close_result = close(client_fd);
     if (close_result == ERROR) {
         perror("couldn't close");
+        unlink("server");
         return COMPLETION_ERROR;
     }
-
+    
+    unlink("server");
     return SUCCESSFUL_END;
 }
